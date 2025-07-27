@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantum Music Generator</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Adjust this if necessary -->
+</head>
+
+<body>
+    <h1>Generate Music Based on Your Emotion</h1>
+    <form id="emotion-form" action="/play" method="POST">
+        <label for="emotion">Select Your Emotion:</label>
+        <select id="emotion" name="emotion">
+            <option value="happy">Happy</option>
+            <option value="sad">Sad</option>
+            <option value="calm">Calm</option>
+            <option value="excited">Excited</option>
+        </select>
+        <button type="submit">Generate Music</button>
+    </form>
+
+    <button id="ping-button">Test Backend Connection</button>
+    <div id="ping-result"></div>
+
+    <div id="player"></div>
+    <script src="../static/script.js"></script>
+
+    <script>
+        document.getElementById('ping-button').addEventListener('click', function() {
+            fetch('/ping')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('ping-result').innerText = data;
+                })
+                .catch(error => {
+                    document.getElementById('ping-result').innerText = 'Error connecting to the backend';
+                });
+        });
+    </script>
+</body>
+
+</html>
